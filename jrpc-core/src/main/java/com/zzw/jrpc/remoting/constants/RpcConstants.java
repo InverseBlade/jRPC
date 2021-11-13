@@ -5,6 +5,9 @@ import java.nio.charset.StandardCharsets;
 
 public class RpcConstants {
 
+    public static final byte[] MAGIC_NUMBER = {(byte) 'j', (byte) 'r', (byte) 'p', (byte) 'c'};
+    public static final int HEADER_LENGTH = 13;
+
     public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
     public static final byte REQUEST_TYPE = 0x1;
     public static final byte RESPONSE_TYPE = 0x2;
