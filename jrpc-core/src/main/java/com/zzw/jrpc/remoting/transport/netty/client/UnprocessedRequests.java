@@ -10,6 +10,15 @@ public class UnprocessedRequests {
 
     private static final Map<String, CompletableFuture<RpcResponse<Object>>> table = new ConcurrentHashMap<>();
 
+    public void remove(String requestId) {
+        CompletableFuture<RpcResponse<Object>> future = table.remove(requestId);
+        if (future == null) {
+            throw new IllegalStateException();
+        } else {
+            future.complete(null);
+        }
+    }
+
     public void set(String requestId, CompletableFuture<RpcResponse<Object>> future) {
         table.put(requestId, future);
     }

@@ -7,7 +7,7 @@ import com.zzw.jrpc.remoting.dto.RpcMessage;
 import com.zzw.jrpc.remoting.dto.RpcRequest;
 import com.zzw.jrpc.remoting.dto.RpcResponse;
 import com.zzw.jrpc.remoting.handler.RpcRequestHandler;
-import com.zzw.jrpc.serialize.DefaultSerializer;
+import com.zzw.jrpc.serialize.ProtostuffSerializer;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -48,7 +48,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcMessage> 
                 log.error("not writeable now, message has been dropped.");
             }
         }
-        log.info("Size of ResponseRpcMsg=[{}] KB", new DefaultSerializer().serialize(responseRpcMsg).length * 1.0 / 1024);
+        log.info("Size of ResponseRpcMsg=[{}] KB", new ProtostuffSerializer().serialize(responseRpcMsg).length * 1.0 / 1024);
         ctx.writeAndFlush(responseRpcMsg).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
     }
 

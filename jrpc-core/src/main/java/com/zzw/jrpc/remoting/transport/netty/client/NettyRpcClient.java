@@ -62,6 +62,7 @@ public class NettyRpcClient implements RpcTransport {
                 } else {
                     future.channel().close();
                     resultFuture.completeExceptionally(future.cause());
+                    unprocessedRequests.remove(rpcRequest.getRequestId());
                     log.error("Client Send Fail: ", future.cause());
                 }
             });
