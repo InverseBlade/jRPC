@@ -98,9 +98,9 @@ public class NettyRpcClient implements RpcTransport {
     @SneakyThrows
     public Channel doConnect(InetSocketAddress addr) {
         CompletableFuture<Channel> completableFuture = new CompletableFuture<>();
-        bootstrap.connect(addr).addListener((ChannelFutureListener) future -> {
-            if (future.isSuccess()) {
-                completableFuture.complete(future.channel());
+        bootstrap.connect(addr).addListener((ChannelFuture channelFuture) -> {
+            if (channelFuture.isSuccess()) {
+                completableFuture.complete(channelFuture.channel());
             } else {
                 throw new IllegalStateException();
             }
